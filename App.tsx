@@ -11,6 +11,7 @@ import { TarotCardData, CardOrientation, GestureType, HandData, HistoryItem } fr
 import { TAROT_DECK, CARD_BACK_URL } from './constants';
 import { interpretTarot, TarotReadingResult, Language } from './services/geminiService';
 import { soundService, SoundType } from './services/SoundService';
+import { shuffleArray } from './utils/arrayUtils';
 import SoundToggle from './components/SoundToggle';
 import GestureGuide from './components/GestureGuide';
 import { t } from './i18n';
@@ -143,7 +144,7 @@ const App: React.FC = () => {
   const [drawnCards, setDrawnCards] = useState<{ card: TarotCardData, orientation: CardOrientation }[]>([]);
   const [interpretation, setInterpretation] = useState<string>("");
 
-  const [deck, setDeck] = useState<TarotCardData[]>(TAROT_DECK);
+  const [deck, setDeck] = useState<TarotCardData[]>(() => shuffleArray(TAROT_DECK));
   const [history, setHistory] = useState<HistoryItem[]>([]);
   const [currentHand, setCurrentHand] = useState<HandData>({ gesture: GestureType.NONE, x: 0.5, y: 0.5, z: 0 });
   const [isGestureMode, setIsGestureMode] = useState(true);
@@ -301,7 +302,7 @@ const App: React.FC = () => {
   const handleStartGame = () => {
     soundService.play(SoundType.BUTTON_CLICK);
     setGameState(GameState.DRAWING);
-    setDeck(TAROT_DECK); // Reset deck
+    setDeck(shuffleArray(TAROT_DECK)); // Reset and shuffle deck
     setDrawnCards([]);
     setInterpretation("");
   };
@@ -337,8 +338,10 @@ const App: React.FC = () => {
     const newDrawnCards = [...drawnCards, newCard];
     setDrawnCards(newDrawnCards);
 
-    // Remove from deck pool
-    setDeck(prev => prev.filter(c => c.id !== card.id));
+    // Remove from deck pool - DELAYED to allow flip animation to finish on the correct card
+    setTimeout(() => {
+      setDeck(prev => shuffleArray(prev.filter(c => c.id !== card.id)));
+    }, 2000);
 
     // Delay hiding reveal
     setTimeout(async () => {
@@ -610,7 +613,7 @@ const App: React.FC = () => {
 
         <div className="mt-auto pt-6 border-t border-white/10">
           <button
-            onClick={() => { setDeck(TAROT_DECK); setHistory([]); setInterpretation(""); }}
+            onClick={() => { setDeck(shuffleArray(TAROT_DECK)); setHistory([]); setInterpretation(""); }}
             className="mystic-button w-full py-4 rounded-xl text-sm font-bold tracking-widest group"
           >
             <span className="group-hover:text-white transition-colors">✦ RESET DECK ✦</span>

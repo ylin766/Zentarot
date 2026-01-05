@@ -1,0 +1,233 @@
+/* ZenTarot - Mystical Theme Styles */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --color-mystic-purple: #6B21A8;
+  --color-mystic-gold: #D4AF37;
+  --color-mystic-dark: #0A0A0F;
+}
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+h1,
+h2,
+h3,
+.title {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+}
+
+/* 3D Glass Panel */
+.glass-panel {
+  background: linear-gradient(135deg,
+      rgba(25, 20, 45, 0.7) 0%,
+      rgba(45, 30, 70, 0.5) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  border-left: 1px solid rgba(212, 175, 55, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 10px 30px -5px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: perspective(1000px) rotateX(2deg);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 15px 40px -5px rgba(107, 33, 168, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: perspective(1000px) rotateX(0deg) translateY(-2px);
+}
+
+/* Magic Mirror (Video Container) */
+.magic-mirror {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px double rgba(212, 175, 55, 0.6);
+  box-shadow:
+    0 0 0 2px #0a0a0f,
+    0 0 0 5px rgba(107, 33, 168, 0.4),
+    0 0 30px rgba(147, 51, 234, 0.3);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 50;
+}
+
+.magic-mirror:hover {
+  box-shadow:
+    0 0 0 2px #0a0a0f,
+    0 0 0 5px rgba(212, 175, 55, 0.8),
+    0 0 50px rgba(212, 175, 55, 0.5);
+  transform: scale(1.05);
+}
+
+/* Side Drawer */
+.side-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  background: linear-gradient(90deg,
+      rgba(10, 5, 20, 0.95),
+      rgba(20, 15, 35, 0.9));
+  border-left: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+  transform: translateX(100%);
+  /* 默认隐藏 */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 40;
+}
+
+.side-drawer.open {
+  transform: translateX(0);
+}
+
+/* Toggle Button for Drawer */
+.drawer-toggle {
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 80px;
+  background: rgba(20, 15, 35, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D4AF37;
+  writing-mode: vertical-rl;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+/* 3D Mystic Button */
+.mystic-button {
+  background: linear-gradient(180deg,
+      rgba(107, 33, 168, 0.8) 0%,
+      rgba(59, 7, 100, 0.9) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow:
+    0 4px 0 rgba(40, 5, 70, 1),
+    0 10px 10px rgba(0, 0, 0, 0.3);
+  color: #D4AF37;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: all 0.2s ease;
+  transform: perspective(500px) translateZ(0);
+}
+
+.mystic-button:active {
+  transform: perspective(500px) translateY(4px);
+  box-shadow:
+    0 0 0 rgba(40, 5, 70, 1),
+    0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Interpretation Panel 3D Float */
+.interpretation-panel {
+  background: rgba(15, 10, 30, 0.85);
+  /* 稍微透明 */
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.8),
+    inset 0 0 30px rgba(107, 33, 168, 0.1);
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  animation: mystic-float 6s ease-in-out infinite;
+  border-radius: 20px;
+}
+
+/* Animations */
+@keyframes mystic-float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotateX(5deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotateX(2deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.text-gold {
+  color: #D4AF37;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* History Card */
+.history-card {
+  transition: all 0.3s ease;
+  border-left: 2px solid transparent;
+}
+
+.history-card:hover {
+  border-left-color: #D4AF37;
+  background: rgba(107, 33, 168, 0.2);
+  transform: translateX(5px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 2px;
+}
+
+/* Mystic Divider */
+.mystic-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.5), transparent);
+  margin: 15px 0;
+  position: relative;
+}
+
+.mystic-divider::after {
+  content: '✦';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #D4AF37;
+  background: #0A0A0F;
+  padding: 0 5px;
+  font-size: 10px;
+}

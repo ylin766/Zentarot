@@ -1,0 +1,7 @@
+{
+  "name": "ZenTarot: Gesture-Controlled 3D Tarot Experience",
+  "description": "An immersive 3D Tarot reading application using Three.js and MediaPipe hand tracking. Experience card drawing with natural hand gestures, particle ash effects, and AI-powered interpretations.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

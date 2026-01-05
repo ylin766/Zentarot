@@ -1,3 +1,4 @@
+![Demo](demo_fast.gif)
 
 ## Run 
 
